@@ -29,7 +29,7 @@ class ManagedStartViewActivation(StartActivation):
 
         if data:
             if not self.management_form.is_valid():
-                raise FlowRuntimeError('Activation metadata is broken {}'.format(self.management_form.errors))
+                raise FlowRuntimeError('Activation metadata is broken {0}'.format(self.management_form.errors))
             self.task = self.management_form.save(commit=False)
 
     def has_perm(self, user):
@@ -65,7 +65,7 @@ class ManagedViewActivation(ViewActivation):
 
         if data:
             if not self.management_form.is_valid():
-                raise FlowRuntimeError('Activation metadata is broken {}'.format(self.management_form.errors))
+                raise FlowRuntimeError('Activation metadata is broken {0}'.format(self.management_form.errors))
             self.task = self.management_form.save(commit=False)
 
     def has_perm(self, user):

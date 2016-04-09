@@ -145,7 +145,7 @@ class FlowTaskTest(object):
             flow_do(self.flow_task, self, **data)
         finally:
             task_finished.disconnect(self.task_finished)
-        assert self._task, 'Flow task {} not finished'.format(self.flow_task.name)
+        assert self._task, 'Flow task {0} not finished'.format(self.flow_task.name)
 
         return self
 
@@ -168,7 +168,7 @@ class FlowTaskTest(object):
         :rtype: FlowTaskTest
         """
         if not fail_message:
-            fail_message = "Flow task {} post condition fails".format(self.flow_task.name)
+            fail_message = "Flow task {0} post condition fails".format(self.flow_task.name)
 
         if callable(assertion):
             args = inspect.getargspec(assertion).args
@@ -178,7 +178,7 @@ class FlowTaskTest(object):
             elif args == ['t']:
                 assert assertion(self.task), fail_message
             else:
-                raise ValueError('Invalid assertion args spec {}'.format(args))
+                raise ValueError('Invalid assertion args spec {0}'.format(args))
         else:
             assert assertion, fail_message
 

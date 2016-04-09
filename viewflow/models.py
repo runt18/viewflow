@@ -50,12 +50,12 @@ class AbstractProcess(models.Model):
         if self.flow_cls and self.flow_cls.process_cls == type(self):
             return Template(self.flow_cls.summary_template).render(Context({'process': self, 'flow_cls': self.flow_cls}))
 
-        return "{} - {}".format(self.flow_cls.process_title, self.status)
+        return "{0} - {1}".format(self.flow_cls.process_title, self.status)
 
     def __str__(self):
         if self.flow_cls:
-            return '{} #{}'.format(self.flow_cls.process_title, self.pk)
-        return "<Process {}> - {}".format(self.pk, self.status)
+            return '{0} #{1}'.format(self.flow_cls.process_title, self.pk)
+        return "<Process {0}> - {1}".format(self.pk, self.status)
 
     def refresh_from_db(self, using=None, fields=None, **kwargs):
         if hasattr(models.Model, 'refresh_from_db'):
@@ -73,7 +73,7 @@ class AbstractProcess(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            '{}:details'.format(self.flow_cls.instance.namespace),
+            '{0}:details'.format(self.flow_cls.instance.namespace),
             kwargs={'process_pk': self.pk}
         )
 
@@ -144,12 +144,12 @@ class AbstractTask(models.Model):
 
     def __str__(self):
         if self.flow_task:
-            return "<{}.{}/{}> - {}".format(
+            return "<{0}.{1}/{2}> - {3}".format(
                 self.flow_task.flow_cls._meta.namespace,
                 self.flow_task,
                 self.pk,
                 self.status)
-        return "<Task {}> - {}".format(self.pk, self.status)
+        return "<Task {0}> - {1}".format(self.pk, self.status)
 
     def refresh_from_db(self, using=None, fields=None, **kwargs):
         if hasattr(models.Model, 'refresh_from_db'):

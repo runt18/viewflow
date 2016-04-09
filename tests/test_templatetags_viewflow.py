@@ -31,7 +31,7 @@ class Test(TestCase):
         url = Template("{% load viewflow %}{% flowurl task 'assign' user=user %}").render(
             Context({'task': task, 'user': User()}))
         self.assertEqual(
-            '/test_tempaltetags/{}/view/{}/assign/'.format(act.process.pk, task.pk),
+            '/test_tempaltetags/{0}/view/{1}/assign/'.format(act.process.pk, task.pk),
             url)
 
     def test_flowurl_guess_by_task(self):
@@ -40,7 +40,7 @@ class Test(TestCase):
         url = Template("{% load viewflow %}{% flowurl task user=user %}").render(
             Context({'task': task, 'user': User()}))
         self.assertEqual(
-            '/test_tempaltetags/{}/view/{}/assign/'.format(act.process.pk, task.pk),
+            '/test_tempaltetags/{0}/view/{1}/assign/'.format(act.process.pk, task.pk),
             url)
 
     def test_flow_perms(self):

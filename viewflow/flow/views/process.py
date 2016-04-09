@@ -21,7 +21,7 @@ class CancelView(FlowManagePermissionMixin, generic.DetailView):
         opts = self.flow_cls._meta
 
         return (
-            '{}/{}/process_cancel.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/process_cancel.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/process_cancel.html')
 
     def get_queryset(self):
@@ -34,7 +34,7 @@ class CancelView(FlowManagePermissionMixin, generic.DetailView):
                 back_url = '/'
             return back_url
 
-        return reverse('{}:index'.format(self.object.flow_cls.instance.namespace))
+        return reverse('{0}:index'.format(self.object.flow_cls.instance.namespace))
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -98,7 +98,7 @@ class CancelView(FlowManagePermissionMixin, generic.DetailView):
             elif can_cancel:
                 activation.cancel()
             else:
-                raise FlowRuntimeError("Can't cancel {}".format(task))
+                raise FlowRuntimeError("Can't cancel {0}".format(task))
 
     def _cancel_process(self):
         self.object.status = STATUS.CANCELED

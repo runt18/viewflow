@@ -178,11 +178,11 @@ class FlowMeta(object):
 
     @property
     def namespace(self):
-        return "{}/{}".format(self.app_label, self.flow_label)
+        return "{0}/{1}".format(self.app_label, self.flow_label)
 
     @property
     def flow_label(self):
-        module = "{}.{}".format(self.flow_cls.__module__, self.flow_cls.__name__)
+        module = "{0}.{1}".format(self.flow_cls.__module__, self.flow_cls.__name__)
         app_label, app_package = get_containing_app_data(module)
 
         subpath = module[len(app_package) + 1:]
@@ -274,10 +274,10 @@ class FlowMetaClass(type):
                     process_options.default_permissions += (permission,)
         else:
             # django 1.6
-            permissions = (('view_{}'.format(process_options.model_name),
-                            'View {}'.format(process_options.model_name)),
-                           ('manage_{}'.format(process_options.model_name),
-                            'Manage {}'.format(process_options.model_name)))
+            permissions = (('view_{0}'.format(process_options.model_name),
+                            'View {0}'.format(process_options.model_name)),
+                           ('manage_{0}'.format(process_options.model_name),
+                            'Manage {0}'.format(process_options.model_name)))
 
             for permission in permissions:
                 if permission not in process_options.permissions:
@@ -312,7 +312,7 @@ class Flow(object, metaclass=FlowMetaClass):
 
     @property
     def namespace(self):
-        return "{}/{}".format(self._meta.app_label, self._meta.flow_label)
+        return "{0}/{1}".format(self._meta.app_label, self._meta.flow_label)
 
     @property
     def urls(self):
@@ -328,12 +328,12 @@ class Flow(object, metaclass=FlowMetaClass):
     @property
     def view_permission_name(self):
         opts = self.process_cls._meta
-        return "{}.view_{}".format(opts.app_label, opts.model_name)
+        return "{0}.view_{1}".format(opts.app_label, opts.model_name)
 
     @property
     def manage_permission_name(self):
         opts = self.process_cls._meta
-        return "{}.manage_{}".format(opts.app_label, opts.model_name)
+        return "{0}.manage_{1}".format(opts.app_label, opts.model_name)
 
     def __str__(self):
         return self.process_title

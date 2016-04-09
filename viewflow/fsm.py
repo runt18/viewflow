@@ -102,7 +102,7 @@ class SuperTransitionDescriptor(TransitionDescriptor):
                 if not isinstance(super_descriptor, SuperTransitionDescriptor):
                     break
         else:
-            raise ValueError('Base transition not found for {}'.format(self.name))
+            raise ValueError('Base transition not found for {0}'.format(self.name))
 
         return super_descriptor
 
@@ -170,7 +170,7 @@ class State(object):
 
     @property
     def propname(self):
-        return '_fsm{}'.format(id(self))
+        return '_fsm{0}'.format(id(self))
 
     def transition(self, source=None, target=None, conditions=None):
         def _wrapper(func):
@@ -210,7 +210,7 @@ class State(object):
         return _wrapper
 
     def get_available_transtions(self, instance):
-        transitions_cache = instance.__class__.__dict__.get('_transitions{}'.format(self.propname), None)
+        transitions_cache = instance.__class__.__dict__.get('_transitions{0}'.format(self.propname), None)
         if transitions_cache is None:
             transitions_cache = {}
             descriptors = inspect.getmembers(instance.__class__, lambda attr: isinstance(attr, TransitionDescriptor))
@@ -220,7 +220,7 @@ class State(object):
                         transitions_cache[source] = []
                     transitions_cache[source].append(descriptor)
 
-            setattr(instance.__class__, '_transitions{}'.format(self.propname), transitions_cache)
+            setattr(instance.__class__, '_transitions{0}'.format(self.propname), transitions_cache)
 
         result = [descriptor for descriptor in transitions_cache.get(self.get(instance), [])
                   if descriptor.can_proceed(instance)]

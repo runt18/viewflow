@@ -24,7 +24,7 @@ class Test(TransactionTestCase):
         """Start celery worker connection the the test database"""
         env = os.environ.copy()
         database_url = env['DATABASE_URL']
-        env['DATABASE_URL'] = '{}/{}'.format(
+        env['DATABASE_URL'] = '{0}/{1}'.format(
             database_url[:database_url.rfind('/')], connection.settings_dict['NAME'])
 
         cmd = ['celery', 'worker', '-A', 'tests.celery_app', '-l', 'debug']
@@ -48,7 +48,7 @@ class Test(TransactionTestCase):
                 return process.get_task(flow_task, status=status)
             except Task.DoesNotExist:
                 time.sleep(0.05)
-        assert False, 'Task {} not found'.format(flow_task)
+        assert False, 'Task {0} not found'.format(flow_task)
 
     def test_flow_succeed(self):
         activation = TestCeleryFlow.start.run(throw_error=False)

@@ -25,7 +25,7 @@ class Insurance(models.Model):
     cost = models.IntegerField()
 
     def __str__(self):
-        return '{} ${}'.format(self.company_name, self.cost)
+        return '{0} ${1}'.format(self.company_name, self.cost)
 
 
 class Shipment(models.Model):

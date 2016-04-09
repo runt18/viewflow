@@ -36,10 +36,10 @@ def flowurl(parser, token):
     """
     def geturl(ref, url_name=None, user=None):
         if isinstance(ref, Flow):
-            url_ref = '{}:{}'.format(ref.namespace, url_name if url_name else 'index')
+            url_ref = '{0}:{1}'.format(ref.namespace, url_name if url_name else 'index')
             return reverse(url_ref)
         elif isinstance(ref, AbstractProcess):
-            kwargs, url_ref = {}, '{}:{}'.format(ref.flow_cls.instance.namespace, url_name if url_name else 'index')
+            kwargs, url_ref = {}, '{0}:{1}'.format(ref.flow_cls.instance.namespace, url_name if url_name else 'index')
             if url_name in ['details', 'cancel']:
                 kwargs['process_pk'] = ref.pk
             return reverse(url_ref, kwargs=kwargs)
@@ -50,14 +50,14 @@ def flowurl(parser, token):
                 app_label, flow_cls_path = ref.split('/')
             except ValueError:
                 raise TemplateSyntaxError(
-                    "Flow reference string should  looks like 'app_label/FlowCls' but '{}'".format(ref))
+                    "Flow reference string should  looks like 'app_label/FlowCls' but '{0}'".format(ref))
 
             app_package = get_app_package(app_label)
             if app_package is None:
-                raise TemplateSyntaxError("{} app not found".format(app_label))
+                raise TemplateSyntaxError("{0} app not found".format(app_label))
 
-            flow_cls = import_string('{}.flows.{}'.format(app_package, flow_cls_path))
-            url_ref = '{}:{}'.format(flow_cls.instance.namespace, url_name if url_name else 'index')
+            flow_cls = import_string('{0}.flows.{1}'.format(app_package, flow_cls_path))
+            url_ref = '{0}:{1}'.format(flow_cls.instance.namespace, url_name if url_name else 'index')
             return reverse(url_ref)
 
     class URLNode(TagHelperNode):
@@ -121,7 +121,7 @@ def include_process_data(context, process):
     opts = process.flow_cls._meta
 
     template_names = (
-        '{}/{}/process_data.html'.format(opts.app_label, opts.flow_label),
+        '{0}/{1}/process_data.html'.format(opts.app_label, opts.flow_label),
         'viewflow/flow/process_data.html')
     template = select_template(template_names)
 

@@ -32,7 +32,7 @@ class StartSignal(mixins.TaskDescriptionMixin,
     def ready(self):
         self.signal.connect(
             self.on_signal, sender=self.sender,
-            dispatch_uid="viewflow.flow.signal/{}.{}.{}".format(
+            dispatch_uid="viewflow.flow.signal/{0}.{1}.{2}".format(
                 self.flow_cls.__module__, self.flow_cls.__name__, self.name))
 
 
@@ -58,5 +58,5 @@ class Signal(mixins.TaskDescriptionMixin,
     def ready(self):
         self.signal.connect(
             self.on_signal, sender=self.sender,
-            dispatch_uid="viewflow.flow.signal/{}.{}.{}".format(
+            dispatch_uid="viewflow.flow.signal/{0}.{1}.{2}".format(
                 self.flow_cls.__module__, self.flow_cls.__name__, self.name))

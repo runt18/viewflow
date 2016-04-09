@@ -34,7 +34,7 @@ def flow_func(task_loader=None, **lock_args):
             task = receiver.get_task(flow_task, *func_args, **func_kwargs)
             if task is None:
                 raise FlowRuntimeError(
-                    "The task_loader didn't return any task for {}\n{}\n{}".format(
+                    "The task_loader didn't return any task for {0}\n{1}\n{2}".format(
                         flow_task.name, func_args, func_kwargs))
 
             lock = flow_task.flow_cls.lock_impl(flow_task.flow_cls.instance, **lock_args)
@@ -109,7 +109,7 @@ def flow_job(**lock_args):
                     task = flow_task.flow_cls.task_cls.objects.get(pk=task_pk)
                     activation = self.activation if self.activation else flow_task.activation_cls()
                     activation.initialize(flow_task, task)
-                    activation.error(comments="{}\n{}".format(exc, traceback.format_exc()))
+                    activation.error(comments="{0}\n{1}".format(exc, traceback.format_exc()))
                 raise
             else:
                 # mark as done
@@ -194,7 +194,7 @@ def flow_signal(task_loader=None, allow_skip_signals=False, **lock_args):
                     return
                 else:
                     raise FlowRuntimeError(
-                        "The task_loader didn't return any task for {}\n{}".format(
+                        "The task_loader didn't return any task for {0}\n{1}".format(
                             flow_task.name, signal_kwargs))
 
             lock = flow_task.flow_cls.lock_impl(flow_task.flow_cls.instance, **lock_args)

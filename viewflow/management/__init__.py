@@ -6,7 +6,7 @@ try:
     def import_flows(app_config, **kwargs):
         """Pre-import flows to allow permissions auto-creation."""
         try:
-            __import__('{}.flows'.format(app_config.module.__name__))
+            __import__('{0}.flows'.format(app_config.module.__name__))
         except ImportError:
             pass
 
@@ -20,7 +20,7 @@ except ImportError:
 
         def import_flows(app, **kwargs):
             try:
-                __import__('{}.flows'.format(get_app_package(app)))
+                __import__('{0}.flows'.format(get_app_package(app)))
             except ImportError:
                 pass
 
@@ -40,7 +40,7 @@ except ImportError:
         def import_flows(sender, **kwargs):
             """Pre-import flows to allow permissions auto-creation."""
             try:
-                __import__('{}.flows'.format(sender.__package__))
+                __import__('{0}.flows'.format(sender.__package__))
             except ImportError:
                 pass
 

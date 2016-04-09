@@ -35,8 +35,8 @@ class ViewMixin(object):
         opts = self.activation.flow_task.flow_cls._meta
 
         return (
-            '{}/{}/{}.html'.format(opts.app_label, opts.flow_label, flow_task.name),
-            '{}/{}/task.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/{2}.html'.format(opts.app_label, opts.flow_label, flow_task.name),
+            '{0}/{1}/task.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/task.html')
 
     def activation_done(self, *args, **kwargs):
@@ -106,8 +106,8 @@ class ActivationViewMixin(object):
         opts = self.flow_task.flow_cls._meta
 
         return (
-            '{}/{}/{}.html'.format(opts.app_label, opts.flow_label, flow_task.name),
-            '{}/{}/task.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/{2}.html'.format(opts.app_label, opts.flow_label, flow_task.name),
+            '{0}/{1}/task.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/task.html')
 
     def get_success_url(self):
@@ -185,8 +185,8 @@ class AssignView(ManagedViewActivation, generic.TemplateView):
         opts = self.flow_task.flow_cls._meta
 
         return (
-            '{}/{}/{}_assign.html'.format(opts.app_label, opts.flow_label, flow_task.name),
-            '{}/{}/task_assign.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/{2}_assign.html'.format(opts.app_label, opts.flow_label, flow_task.name),
+            '{0}/{1}/task_assign.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/task_assign.html')
 
     def get_context_data(self, **kwargs):
@@ -203,7 +203,7 @@ class AssignView(ManagedViewActivation, generic.TemplateView):
             back = '/'
 
         if '_continue' in self.request.POST and back:
-            url = "{}?back={}".format(url, urlquote(back))
+            url = "{0}?back={1}".format(url, urlquote(back))
         elif back:
             url = back
 

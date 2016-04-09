@@ -31,8 +31,8 @@ class Token(object):
 
     def get_common_split_prefix(self, join_token, task_pk):
         if join_token == self.token:
-            return '{}/{}_'.format(self.token, task_pk)
-        return '{}_'.format(self.token.rsplit('_', 1)[0])
+            return '{0}/{1}_'.format(self.token, task_pk)
+        return '{0}_'.format(self.token.rsplit('_', 1)[0])
 
     def __str__(self):
         return self.token
@@ -50,4 +50,4 @@ class Token(object):
     @classmethod
     def split_token_source(cls, prev_token, task_pk):
         for n in count(1):
-            yield Token("{}/{}_{}".format(prev_token, task_pk, n))
+            yield Token("{0}/{1}_{2}".format(prev_token, task_pk, n))

@@ -18,7 +18,7 @@ class SplitActivation(AbstractGateActivation):
                 self.next_tasks.append(node)
 
         if not self.next_tasks:
-            raise FlowRuntimeError('No next task available for {}'.format(self.flow_task.name))
+            raise FlowRuntimeError('No next task available for {0}'.format(self.flow_task.name))
 
     def activate_next(self):
         token_source = Token.split_token_source(self.task.token, self.task.pk)

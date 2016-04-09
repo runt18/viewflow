@@ -8,17 +8,17 @@ from .token import Token
 
 def import_flow_by_ref(flow_strref):
     app_label, flow_path = flow_strref.split('/')
-    return import_string('{}.{}'.format(get_app_package(app_label), flow_path))
+    return import_string('{0}.{1}'.format(get_app_package(app_label), flow_path))
 
 
 def get_flow_ref(flow_cls):
-    module = "{}.{}".format(flow_cls.__module__, flow_cls.__name__)
+    module = "{0}.{1}".format(flow_cls.__module__, flow_cls.__name__)
     app_label, app_package = get_containing_app_data(module)
     if app_label is None:
-        raise FlowRuntimeError('No application found for {}. Check your INSTALLED_APPS setting'.format(module))
+        raise FlowRuntimeError('No application found for {0}. Check your INSTALLED_APPS setting'.format(module))
 
     subpath = module[len(app_package) + 1:]
-    return "{}/{}".format(app_label, subpath)
+    return "{0}/{1}".format(app_label, subpath)
 
 
 def import_task_by_ref(task_strref):
@@ -27,7 +27,7 @@ def import_task_by_ref(task_strref):
     """
     app_label, flow_path = task_strref.split('/')
     flow_path, task_name = flow_path.rsplit('.', 1)
-    flow_cls = import_string('{}.{}'.format(get_app_package(app_label), flow_path))
+    flow_cls = import_string('{0}.{1}'.format(get_app_package(app_label), flow_path))
     return flow_cls._meta.node(task_name)
 
 
@@ -35,11 +35,11 @@ def get_task_ref(flow_task):
     module = flow_task.flow_cls.__module__
     app_label, app_package = get_containing_app_data(module)
     if app_label is None:
-        raise FlowRuntimeError('No application found for {}. Check your INSTALLED_APPS setting'.format(module))
+        raise FlowRuntimeError('No application found for {0}. Check your INSTALLED_APPS setting'.format(module))
 
     subpath = module[len(app_package) + 1:]
 
-    return "{}/{}.{}.{}".format(app_label, subpath, flow_task.flow_cls.__name__, flow_task.name)
+    return "{0}/{1}.{2}.{3}".format(app_label, subpath, flow_task.flow_cls.__name__, flow_task.name)
 
 
 class ClassValueWrapper(object):

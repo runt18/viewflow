@@ -39,7 +39,7 @@ class RedisLock(object):
 
         @contextmanager
         def lock(flow_cls, process_pk):
-            key = 'django-viewflow-lock-{}/{}'.format(flow_cls._meta.namespace, process_pk)
+            key = 'django-viewflow-lock-{0}/{1}'.format(flow_cls._meta.namespace, process_pk)
 
             for i in range(attempts):
                 lock = cache.lock(key, timeout=expires)
@@ -50,7 +50,7 @@ class RedisLock(object):
                     sleep_time = (((i + 1) * random.random()) + 2 ** i) / 2.5
                     time.sleep(sleep_time)
             else:
-                raise FlowLockFailed('Lock failed for {}'.format(flow_cls))
+                raise FlowLockFailed('Lock failed for {0}'.format(flow_cls))
 
             try:
                 with transaction.atomic():

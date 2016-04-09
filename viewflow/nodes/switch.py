@@ -18,7 +18,7 @@ class SwitchActivation(AbstractGateActivation):
                 self.next_task = node
 
         if not self.next_task:
-            raise FlowRuntimeError('No next task available for {}'.format(self.flow_task.name))
+            raise FlowRuntimeError('No next task available for {0}'.format(self.flow_task.name))
 
     def activate_next(self):
         self.next_task.activate(prev_activation=self, token=self.task.token)

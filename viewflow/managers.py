@@ -14,7 +14,7 @@ def _available_flows(flow_classes, user):
     result = []
     for flow_cls in flow_classes:
         opts = flow_cls.process_cls._meta
-        view_perm = "{}.view_{}".format(opts.app_label, opts.model_name)
+        view_perm = "{0}.view_{1}".format(opts.app_label, opts.model_name)
         if user.has_perm(view_perm):
             result.append(flow_cls)
     return result

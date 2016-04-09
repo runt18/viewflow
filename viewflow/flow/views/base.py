@@ -41,10 +41,10 @@ def get_next_task_url(request, process):
 
     # Back to process list
     if process and process.pk:
-        return reverse('{}:details'.format(process.flow_cls.instance.namespace),
+        return reverse('{0}:details'.format(process.flow_cls.instance.namespace),
                        kwargs={'process_pk': process.pk})
     else:
-        return reverse('{}:index'.format(process.flow_cls.instance.namespace))
+        return reverse('{0}:index'.format(process.flow_cls.instance.namespace))
 
 
 def get_process_hyperlink(process):
@@ -106,8 +106,8 @@ class DetailsView(generic.TemplateView):
         opts = self.activation.flow_task.flow_cls._meta
 
         return (
-            '{}/{}/{}_details.html'.format(opts.app_label, opts.flow_label, flow_task.name),
-            '{}/{}/task_details.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/{2}_details.html'.format(opts.app_label, opts.flow_label, flow_task.name),
+            '{0}/{1}/task_details.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/task_details.html')
 
     def get_context_data(self, **kwargs):
@@ -139,9 +139,9 @@ class BaseTaskActionView(generic.TemplateView):
         opts = self.activation.flow_task.flow_cls._meta
 
         return (
-            '{}/{}/{}_{}.html'.format(opts.app_label, opts.flow_label, flow_task.name, self.action_name),
-            '{}/{}/task_{}.html'.format(opts.app_label, opts.flow_label, self.action_name),
-            'viewflow/flow/task_{}.html'.format(self.action_name),
+            '{0}/{1}/{2}_{3}.html'.format(opts.app_label, opts.flow_label, flow_task.name, self.action_name),
+            '{0}/{1}/task_{2}.html'.format(opts.app_label, opts.flow_label, self.action_name),
+            'viewflow/flow/task_{0}.html'.format(self.action_name),
             'viewflow/flow/task_action.html')
 
     def get_success_url(self):

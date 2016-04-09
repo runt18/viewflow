@@ -17,7 +17,7 @@ def flow_start_actions(flow_cls, user=None):
     actions = []
     for node in flow_cls._meta.nodes():
         if isinstance(node, flow.Start) and (user is None or node.can_execute(user)):
-            node_url = reverse('{}:{}'.format(flow_cls.instance.namespace, node.name))
+            node_url = reverse('{0}:{1}'.format(flow_cls.instance.namespace, node.name))
             actions.append((node_url, node.name))
 
     actions.sort(key=lambda action: action[0])
@@ -50,7 +50,7 @@ class TaskFilter(FilterSet):
 
         def task_name(task_ref):
             flow_task = import_task_by_ref(task_ref)
-            return "{}/{}".format(flow_task.flow_cls.process_title, flow_task.name.title())
+            return "{0}/{1}".format(flow_task.flow_cls.process_title, flow_task.name.title())
 
         tasks = [(task_ref, task_name(task_ref))
                  for task_ref in queryset.order_by('flow_task').distinct().values_list('flow_task', flat=True)]
@@ -190,7 +190,7 @@ class ProcessListView(FlowViewPermissionMixin, generic.ListView):
         opts = self.flow_cls._meta
 
         return (
-            '{}/{}/process_list.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/process_list.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/process_list.html')
 
     def get_context_data(self, **kwargs):
@@ -225,7 +225,7 @@ class ProcessDetailView(FlowViewPermissionMixin, generic.DetailView):
         opts = self.flow_cls._meta
 
         return (
-            '{}/{}/process_details.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/process_details.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/process_details.html')
 
     def get_context_data(self, **kwargs):
@@ -251,7 +251,7 @@ class TaskListView(FlowViewPermissionMixin, generic.ListView):
         opts = self.flow_cls._meta
 
         return (
-            '{}/{}/task_list.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/task_list.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/task_list.html')
 
     def get_context_data(self, **kwargs):
@@ -280,7 +280,7 @@ class QueueListView(FlowViewPermissionMixin, generic.ListView):
         opts = self.flow_cls._meta
 
         return (
-            '{}/{}/queue.html'.format(opts.app_label, opts.flow_label),
+            '{0}/{1}/queue.html'.format(opts.app_label, opts.flow_label),
             'viewflow/flow/queue.html')
 
     def get_context_data(self, **kwargs):

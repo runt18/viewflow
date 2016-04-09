@@ -140,7 +140,7 @@ class Activation(object):
                     yield
             except Exception as exc:
                 if not context.propagate_exception:
-                    self.task.comments = "{}\n{}".format(exc, traceback.format_exc())
+                    self.task.comments = "{0}\n{1}".format(exc, traceback.format_exc())
                     self.task.finished = now()
                     self.set_status(STATUS.ERROR)
                     self.task.save()
@@ -173,7 +173,7 @@ class Activation(object):
         self.task.save()
 
         # call custom undo handler
-        handler_name = '{}_undo'.format(self.flow_task.name)
+        handler_name = '{0}_undo'.format(self.flow_task.name)
         handler = getattr(self.flow_cls.instance, handler_name, None)
         if handler:
             handler(self)
@@ -278,7 +278,7 @@ class StartActivation(Activation):
         self.task.save()
 
         # call custom undo handler
-        handler_name = '{}_undo'.format(self.flow_task.name)
+        handler_name = '{0}_undo'.format(self.flow_task.name)
         handler = getattr(self.flow_cls.instance, handler_name, None)
         if handler:
             handler(self)
