@@ -65,9 +65,9 @@ class Edge(object):
         return self._label
 
     def __str__(self):
-        edge = "[%s] %s ---> %s" % (self._edge_class, self._src, self._dst)
+        edge = "[{0!s}] {1!s} ---> {2!s}".format(self._edge_class, self._src, self._dst)
         if self._label:
-            edge += " (%s)" % self._label
+            edge += " ({0!s})".format(self._label)
         return edge
 
 
@@ -156,15 +156,15 @@ class _Resolver(object):
         elif isinstance(link, ThisObject):
             node = self.nodes.get(link.name)
             if not node:
-                raise ValueError("Can't found node with name %s" % link.name)
+                raise ValueError("Can't found node with name {0!s}".format(link.name))
             return node
         elif isinstance(link, str):
             node = self.nodes.get(link)
             if not node:
-                raise ValueError("Can't found node with name %s" % link)
+                raise ValueError("Can't found node with name {0!s}".format(link))
             return node
 
-        raise ValueError("Can't resolve %s" % link)
+        raise ValueError("Can't resolve {0!s}".format(link))
 
 
 class FlowMeta(object):

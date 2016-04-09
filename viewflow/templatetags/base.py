@@ -71,7 +71,7 @@ def get_model_display_data(root_instance, user):
         # if any suitable for display children found
         if children:
             change_perm = get_permission_codename('change', root._meta)
-            if user.has_perm("%s.%s" % (root._meta.app_label, change_perm)):
+            if user.has_perm("{0!s}.{1!s}".format(root._meta.app_label, change_perm)):
                 admin_url_name = "admin:{}_{}_change".format(root._meta.app_label, root._meta.model_name)
                 try:
                     root_admin_url = reverse(admin_url_name, args=(root.pk,))

@@ -61,8 +61,8 @@ class TaskAdmin(admin.ModelAdmin):
         opts = self.model._meta
 
         return [
-            "admin/%s/%s/change_form.html" % (opts.app_label, opts.model_name),
-            "admin/%s/change_form.html" % opts.app_label,
+            "admin/{0!s}/{1!s}/change_form.html".format(opts.app_label, opts.model_name),
+            "admin/{0!s}/change_form.html".format(opts.app_label),
             'admin/viewflow/task/change_form.html'
         ]
 

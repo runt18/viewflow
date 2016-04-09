@@ -120,7 +120,7 @@ except ImportError:
                     before_import_registry = copy.copy(register_to._registry)
 
                 try:
-                    import_module('%s.%s' % (app, module_to_search))
+                    import_module('{0!s}.{1!s}'.format(app, module_to_search))
                 except:
                     if register_to:
                         register_to._registry = before_import_registry
@@ -161,7 +161,7 @@ except ImportError:
 
     def manager_from_queryset(manager_cls, queryset_class, class_name=None):
         if class_name is None:
-            class_name = '%sFrom%s' % (manager_cls.__name__, queryset_class.__name__)
+            class_name = '{0!s}From{1!s}'.format(manager_cls.__name__, queryset_class.__name__)
         class_dict = {
             '_queryset_class': queryset_class,
         }
